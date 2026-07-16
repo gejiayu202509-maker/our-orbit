@@ -15,6 +15,11 @@ const planetAssets={
   diary:'planet-diary.png',letters:'planet-letters.png',stats:'planet-stats.png',wishes:'planet-wishes.png',signal:'planet-signal.png'
 };
 
+const worldFocus={
+  timeline:['23%','69%'],map:['60%','79%'],room:['85%','58%'],gallery:['80%','33%'],
+  diary:['25%','20%'],letters:['45%','18%'],stats:['92%','18%'],wishes:['11%','15%'],signal:['65%','27%']
+};
+
 function dayCount(){
   const start=new Date('2024-10-30T00:00:00+08:00');
   const now=new Date();
@@ -34,6 +39,8 @@ function renderWorld(id){
   const gallery=document.querySelector('[data-world-gallery]');
   if(gallery){const visuals=[planetAssets[id],'galaxy-atlas.png','hero-twin-planets.png'];gallery.innerHTML=world.cards.map((card,index)=>`<article class="memory-card" style="background-image:linear-gradient(0deg,rgba(9,13,39,.84),transparent),url('assets/${visuals[index]}')"><small>ARCHIVE · 0${index+1}</small><span>${card}</span></article>`).join('')}
   document.body.dataset.selectedWorld=id;
+  const stage=document.querySelector('.galaxy-stage');
+  if(stage&&worldFocus[id]){stage.style.setProperty('--focus-x',worldFocus[id][0]);stage.style.setProperty('--focus-y',worldFocus[id][1]);stage.classList.remove('is-focusing');void stage.offsetWidth;stage.classList.add('is-focusing');window.setTimeout(()=>stage.classList.remove('is-focusing'),920)}
 }
 
 document.addEventListener('DOMContentLoaded',()=>{
