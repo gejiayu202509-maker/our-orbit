@@ -41,10 +41,12 @@ document.addEventListener('DOMContentLoaded',()=>{
   document.querySelectorAll('[data-day-count]').forEach(el=>el.textContent=`DAY ${days}`);
   document.querySelectorAll('[data-day-number]').forEach(el=>el.textContent=days);
   requestAnimationFrame(()=>document.body.classList.add('is-ready'));
-  document.querySelectorAll('[data-world]').forEach(button=>button.addEventListener('click',()=>{renderWorld(button.dataset.world);document.querySelector('[data-world-nav]')?.classList.remove('is-open')}));
+  const isAtlas=document.body.classList.contains('universe-page');
+  const enterWorld=(id)=>{const stage=document.querySelector('.galaxy-stage');if(!stage||stage.classList.contains('is-entering'))return;const focus={timeline:['22%','63%'],map:['60%','78%'],room:['86%','60%'],gallery:['80%','34%'],diary:['25%','27%'],letters:['45%','21%'],stats:['91%','20%'],wishes:['11%','15%'],signal:['65%','27%']}[id]||['50%','50%'];stage.style.setProperty('--jump-x',focus[0]);stage.style.setProperty('--jump-y',focus[1]);stage.classList.add('is-entering');window.setTimeout(()=>window.location.assign(`world.html?world=${encodeURIComponent(id)}`),980)};
+  document.querySelectorAll('[data-world]').forEach(button=>button.addEventListener('click',()=>{if(isAtlas){enterWorld(button.dataset.world)}else{renderWorld(button.dataset.world);document.querySelector('[data-world-nav]')?.classList.remove('is-open')}}));
   document.querySelector('[data-menu-button]')?.addEventListener('click',()=>document.querySelector('[data-world-nav]')?.classList.toggle('is-open'));
   document.querySelectorAll('.detail-tabs button').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('.detail-tabs button').forEach(item=>item.classList.remove('is-active'));button.classList.add('is-active')}));
-  if(document.querySelector('[data-world-title]'))renderWorld('timeline');
+  if(document.querySelector('[data-world-title]')){const requested=new URLSearchParams(window.location.search).get('world');renderWorld(requested&&worlds[requested]?requested:'timeline')}
   if(window.matchMedia('(pointer:fine)').matches){
     const image=document.querySelector('.home-scene__image');
     window.addEventListener('mousemove',event=>{if(!image)return;const x=(event.clientX/window.innerWidth-.5)*8;const y=(event.clientY/window.innerHeight-.5)*5;image.style.transform=`translate(${x}px,${y}px) scale(1.025)`},{passive:true});

@@ -40,6 +40,7 @@
     </aside>
 
     <section class="galaxy-stage" aria-label="宇宙地图">
+      <div class="galaxy-map">
       <div class="atlas-camera-layer" aria-hidden="true"></div>
       <div class="galaxy-stage__heading">
         <span>OUR UNIVERSE · 9 WORLDS</span>
@@ -56,32 +57,7 @@
       <button class="planet-node planet-node--stats" data-world="stats"><i></i><span>恋爱数据<small>OUR NUMBERS</small></span></button>
       <button class="planet-node planet-node--wishes" data-world="wishes"><i></i><span>愿望星座<small>WISH CONSTELLATION</small></span></button>
       <button class="planet-node planet-node--signal" data-world="signal"><i></i><span>我们的通讯星<small>OUR SIGNAL</small></span></button>
-    </section>
-
-    <section class="museum-panel" aria-live="polite">
-      <div class="museum-panel__identity">
-        <a href="index.html" class="back-link">← 返回序章</a>
-        <div class="selected-planet" data-selected-planet><i></i></div>
-        <p data-world-en>STORY TRACK</p>
-        <h2 data-world-title>时间轨道</h2>
-        <span data-world-kicker>沿时间回到每一个重要瞬间</span>
-        <button type="button" class="enter-world">进入这个世界 ↗</button>
       </div>
-
-      <div class="museum-panel__content">
-        <div class="detail-tabs" role="tablist">
-          <button class="is-active" type="button">星球概览</button><button type="button">回忆相册</button><button type="button">聊天记录</button><button type="button">相关日记</button><button type="button">重要事件</button>
-        </div>
-        <p class="detail-intro" data-world-intro>从高中同班，到确定关系，再到每一次旅行与普通日常。所有回忆会沿着时间轨道逐渐亮起。</p>
-        <div class="detail-timeline" data-world-highlights></div>
-        <div class="memory-gallery" data-world-gallery></div>
-      </div>
-
-      <aside class="museum-panel__notes">
-        <span>这个世界将包含</span>
-        <div data-world-notes></div>
-        <footer><strong>葛家羽 · 牛一铭</strong><small><span data-day-count>DAY —</span> / STILL GROWING</small></footer>
-      </aside>
     </section>
   </main>
   <script src="js/site.js"></script>
