@@ -10,6 +10,11 @@ const worlds = {
   signal:{title:'我们的通讯星',en:'OUR SIGNAL',kicker:'把舍不得删的聊天重新收藏',intro:'这里只展示经过挑选的聊天片段，而不是复制整个微信。重要文字、语音和照片会成为回忆之间的通信信号。',highlights:[['FIRST','最初的聊天'],['FUNNY','只有我们懂的玩笑'],['LATE NIGHT','深夜的话题']],notes:['使用本站自己的聊天视觉','支持关联具体回忆','敏感内容遵循三层权限'],cards:['最初的聊天','只有我们懂的玩笑','深夜舍不得结束的话题']}
 };
 
+const planetAssets={
+  timeline:'planet-timeline.png',map:'planet-map.png',room:'planet-room.png',gallery:'planet-gallery.png',
+  diary:'planet-diary.png',letters:'planet-letters.png',stats:'planet-stats.png',wishes:'planet-wishes.png',signal:'planet-signal.png'
+};
+
 function dayCount(){
   const start=new Date('2024-10-30T00:00:00+08:00');
   const now=new Date();
@@ -22,12 +27,14 @@ function renderWorld(id){
   document.querySelectorAll('[data-world]').forEach(el=>el.classList.toggle('is-active',el.dataset.world===id));
   const set=(selector,value)=>{const el=document.querySelector(selector);if(el)el.textContent=value};
   set('[data-world-title]',world.title);set('[data-world-en]',world.en);set('[data-world-kicker]',world.kicker);set('[data-world-intro]',world.intro);
+  const selectedPlanet=document.querySelector('[data-selected-planet]');
+  if(selectedPlanet)selectedPlanet.style.backgroundImage=`url("assets/${planetAssets[id]}")`;
   const timeline=document.querySelector('[data-world-highlights]');
   if(timeline)timeline.innerHTML=world.highlights.map(([date,title])=>`<div><time>${date}</time><i></i><span>${title}</span></div>`).join('');
   const notes=document.querySelector('[data-world-notes]');
   if(notes)notes.innerHTML=world.notes.map(note=>`<p>${note}</p>`).join('');
   const gallery=document.querySelector('[data-world-gallery]');
-  if(gallery)gallery.innerHTML=world.cards.map((card,index)=>`<article class="memory-card"><small>ARCHIVE · 0${index+1}</small><span>${card}</span></article>`).join('');
+  if(gallery){const visuals=[planetAssets[id],'galaxy-atlas.png','hero-twin-planets.png'];gallery.innerHTML=world.cards.map((card,index)=>`<article class="memory-card" style="background-image:linear-gradient(0deg,rgba(9,13,39,.84),transparent),url('assets/${visuals[index]}')"><small>ARCHIVE · 0${index+1}</small><span>${card}</span></article>`).join('')}
   document.body.dataset.selectedWorld=id;
 }
 

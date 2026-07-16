@@ -18,3 +18,20 @@
 @media(max-width:980px){.atlas-shell{padding-left:180px}.world-nav{width:156px}.museum-panel{grid-template-columns:minmax(220px,32%) 1fr}.museum-panel__notes{display:none}.atlas-message{display:none}.planet-node span{display:none}}
 @media(max-width:700px){.topbar{height:60px;padding:0 18px}.brand{font-size:11px;letter-spacing:.2em}.topbar__meta,.sound-button,.atlas-days{display:none}.home-page{overflow:auto}.home-scene__image{width:150%;height:100%;inset:0 -25%;object-position:64% 35%}.home-scene__wash{background:linear-gradient(0deg,rgba(46,60,108,.64),transparent 62%)}.hero{height:100svh;padding:70px 20px 34px;align-items:flex-end}.hero__copy{width:100%}.hero h1{font-size:clamp(34px,10vw,48px)}.hero__lead{font-size:14px}.relationship-clock{flex-wrap:wrap}.relationship-clock em{width:100%;padding:0;border:0}.hero__caption,.home-footer span:first-child{display:none}.primary-link{width:min(100%,320px)}.mobile-menu-button{display:grid;place-items:center}.atlas-shell{padding:70px 12px 12px;display:block;height:auto;min-height:100svh}.world-nav{position:fixed;z-index:60;top:0;left:0;bottom:0;width:min(300px,86vw);border-radius:0;transform:translateX(-105%);transition:.35s}.world-nav.is-open{transform:translateX(0)}.galaxy-stage{height:58vh;min-height:470px}.galaxy-stage__heading{top:0;width:90%}.galaxy-stage__heading h1{font-size:19px}.orbit{opacity:.35}.planet-node>i{width:44px}.planet-node--timeline>i,.planet-node--map>i,.planet-node--room>i{width:54px}.museum-panel{display:block;min-height:620px;border-radius:18px}.museum-panel__identity{height:220px;border:0;border-bottom:1px solid var(--line)}.museum-panel__identity>p{margin-top:28px}.museum-panel__content{height:390px}.memory-gallery{height:230px;grid-template-columns:1fr;overflow:auto}.memory-card{min-height:140px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+
+/* V0.12 atlas: each navigable world uses a dedicated painted planet asset,
+   rather than a procedural colour ball.  The source images stay local so the
+   GitHub Pages build has no external image dependency. */
+.universe-page .planet-node>i{background-color:transparent;background-repeat:no-repeat;background-size:cover;background-position:center;box-shadow:0 0 30px rgba(184,199,255,.22)}
+.universe-page .planet-node--timeline>i{width:128px;background-image:url('../assets/planet-timeline.png')}
+.universe-page .planet-node--map>i{width:118px;background-image:url('../assets/planet-map.png')}
+.universe-page .planet-node--room>i{width:112px;background-image:url('../assets/planet-room.png')}
+.universe-page .planet-node--gallery>i{width:98px;background-image:url('../assets/planet-gallery.png')}
+.universe-page .planet-node--diary>i{width:104px;background-image:url('../assets/planet-diary.png')}
+.universe-page .planet-node--letters>i{width:88px;background-image:url('../assets/planet-letters.png')}
+.universe-page .planet-node--stats>i{width:86px;background-image:url('../assets/planet-stats.png')}
+.universe-page .planet-node--wishes>i{width:88px;background-image:url('../assets/planet-wishes.png')}
+.universe-page .planet-node--signal>i{width:84px;background-image:url('../assets/planet-signal.png')}
+.universe-page .planet-node:hover>i,.universe-page .planet-node.is-active>i{filter:brightness(1.16) saturate(1.1);box-shadow:0 0 42px rgba(255,211,159,.42)}
+.universe-page .selected-planet{width:170px;background-color:transparent;background-repeat:no-repeat;background-size:cover;background-position:center;box-shadow:-13px 18px 38px rgba(4,7,24,.48),0 0 48px rgba(184,200,255,.3)}
+@media(max-width:700px){.universe-page .planet-node--timeline>i{width:76px}.universe-page .planet-node--map>i,.universe-page .planet-node--room>i{width:70px}.universe-page .planet-node--gallery>i,.universe-page .planet-node--diary>i{width:62px}.universe-page .planet-node--letters>i,.universe-page .planet-node--stats>i,.universe-page .planet-node--wishes>i,.universe-page .planet-node--signal>i{width:56px}.universe-page .selected-planet{width:132px}}
