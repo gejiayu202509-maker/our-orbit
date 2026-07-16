@@ -40,7 +40,7 @@ function renderWorld(id){
   if(gallery){const visuals=[planetAssets[id],'galaxy-atlas.png','hero-twin-planets.png'];gallery.innerHTML=world.cards.map((card,index)=>`<article class="memory-card" style="background-image:linear-gradient(0deg,rgba(9,13,39,.84),transparent),url('assets/${visuals[index]}')"><small>ARCHIVE · 0${index+1}</small><span>${card}</span></article>`).join('')}
   document.body.dataset.selectedWorld=id;
   const stage=document.querySelector('.galaxy-stage');
-  if(stage&&worldFocus[id]){stage.style.setProperty('--focus-x',worldFocus[id][0]);stage.style.setProperty('--focus-y',worldFocus[id][1]);stage.classList.remove('is-focusing');void stage.offsetWidth;stage.classList.add('is-focusing');window.setTimeout(()=>stage.classList.remove('is-focusing'),920)}
+  if(stage&&worldFocus[id]){stage.style.setProperty('--focus-x',worldFocus[id][0]);stage.style.setProperty('--focus-y',worldFocus[id][1]);stage.classList.remove('is-focusing','is-focused');void stage.offsetWidth;stage.classList.add('is-focusing');window.setTimeout(()=>{stage.classList.remove('is-focusing');stage.classList.add('is-focused')},1120)}
 }
 
 document.addEventListener('DOMContentLoaded',()=>{
