@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>我们的宇宙｜OUR ORBIT</title>
+  <meta name="description" content="葛家羽与牛一铭的私人数字恋爱博物馆。">
+  <meta name="theme-color" content="#10142f">
+  <link rel="stylesheet" href="css/site.css">
+</head>
+<body class="universe-page">
+  <div class="atlas-background" aria-hidden="true">
+    <img src="assets/galaxy-atlas.png" alt="">
+    <div class="atlas-background__shade"></div>
+    <div class="atlas-background__grain"></div>
+  </div>
+
+  <header class="topbar topbar--atlas">
+    <a class="brand" href="index.html">OUR ORBIT <span>·</span> 我们的轨道</a>
+    <p class="atlas-message">在浩瀚的宇宙中，我们围绕同一个星球，永恒运行。</p>
+    <div class="atlas-days"><span>在一起的第</span><strong data-day-number>—</strong><span>天</span></div>
+    <button class="mobile-menu-button" type="button" data-menu-button aria-label="打开世界导航">☰</button>
+  </header>
+
+  <main class="atlas-shell">
+    <aside class="world-nav" data-world-nav>
+      <div class="world-nav__head"><span>✦</span><div><strong>我们的宇宙</strong><small>OUR UNIVERSE</small></div></div>
+      <nav aria-label="功能世界">
+        <button class="is-active" type="button" data-world="timeline"><i></i><span><strong>时间轨道</strong><small>STORY TRACK</small></span></button>
+        <button type="button" data-world="map"><i></i><span><strong>我们的地图</strong><small>OUR WORLD</small></span></button>
+        <button type="button" data-world="room"><i></i><span><strong>回忆房间</strong><small>MEMORY ROOM</small></span></button>
+        <button type="button" data-world="gallery"><i></i><span><strong>照片星河</strong><small>PHOTO GALAXY</small></span></button>
+        <button type="button" data-world="diary"><i></i><span><strong>双人日记</strong><small>TWIN DIARIES</small></span></button>
+        <button type="button" data-world="letters"><i></i><span><strong>写给未来</strong><small>FUTURE LETTERS</small></span></button>
+        <button type="button" data-world="stats"><i></i><span><strong>恋爱数据</strong><small>OUR NUMBERS</small></span></button>
+        <button type="button" data-world="wishes"><i></i><span><strong>愿望星座</strong><small>WISH CONSTELLATION</small></span></button>
+        <button type="button" data-world="signal"><i></i><span><strong>我们的通讯星</strong><small>OUR SIGNAL</small></span></button>
+      </nav>
+      <footer><span>PRIVATE / COUPLE / PUBLIC</span><small>三层权限 · 长期生长</small></footer>
+    </aside>
+
+    <section class="galaxy-stage" aria-label="宇宙地图">
+      <div class="galaxy-stage__heading">
+        <span>OUR UNIVERSE · 9 WORLDS</span>
+        <h1>沿着银河，寻找属于我们的世界</h1>
+        <p>选择一颗星球，在下方打开它的故事。</p>
+      </div>
+      <div class="orbit orbit--one"></div><div class="orbit orbit--two"></div><div class="orbit orbit--three"></div>
+      <button class="planet-node planet-node--timeline is-active" data-world="timeline"><i></i><span>时间轨道<small>STORY TRACK</small></span></button>
+      <button class="planet-node planet-node--map" data-world="map"><i></i><span>我们的地图<small>OUR WORLD</small></span></button>
+      <button class="planet-node planet-node--room" data-world="room"><i></i><span>回忆房间<small>MEMORY ROOM</small></span></button>
+      <button class="planet-node planet-node--gallery" data-world="gallery"><i></i><span>照片星河<small>PHOTO GALAXY</small></span></button>
+      <button class="planet-node planet-node--diary" data-world="diary"><i></i><span>双人日记<small>TWIN DIARIES</small></span></button>
+      <button class="planet-node planet-node--letters" data-world="letters"><i></i><span>写给未来<small>FUTURE LETTERS</small></span></button>
+      <button class="planet-node planet-node--stats" data-world="stats"><i></i><span>恋爱数据<small>OUR NUMBERS</small></span></button>
+      <button class="planet-node planet-node--wishes" data-world="wishes"><i></i><span>愿望星座<small>WISH CONSTELLATION</small></span></button>
+      <button class="planet-node planet-node--signal" data-world="signal"><i></i><span>我们的通讯星<small>OUR SIGNAL</small></span></button>
+    </section>
+
+    <section class="museum-panel" aria-live="polite">
+      <div class="museum-panel__identity">
+        <a href="index.html" class="back-link">← 返回序章</a>
+        <div class="selected-planet" data-selected-planet><i></i></div>
+        <p data-world-en>STORY TRACK</p>
+        <h2 data-world-title>时间轨道</h2>
+        <span data-world-kicker>沿时间回到每一个重要瞬间</span>
+        <button type="button" class="enter-world">进入这个世界 ↗</button>
+      </div>
+
+      <div class="museum-panel__content">
+        <div class="detail-tabs" role="tablist">
+          <button class="is-active" type="button">星球概览</button><button type="button">回忆相册</button><button type="button">聊天记录</button><button type="button">相关日记</button><button type="button">重要事件</button>
+        </div>
+        <p class="detail-intro" data-world-intro>从高中同班，到确定关系，再到每一次旅行与普通日常。所有回忆会沿着时间轨道逐渐亮起。</p>
+        <div class="detail-timeline" data-world-highlights></div>
+        <div class="memory-gallery" data-world-gallery></div>
+      </div>
+
+      <aside class="museum-panel__notes">
+        <span>这个世界将包含</span>
+        <div data-world-notes></div>
+        <footer><strong>葛家羽 · 牛一铭</strong><small><span data-day-count>DAY —</span> / STILL GROWING</small></footer>
+      </aside>
+    </section>
+  </main>
+  <script src="js/site.js"></script>
+</body>
+</html>
