@@ -27,8 +27,6 @@ function renderWorld(id){
   document.querySelectorAll('[data-world]').forEach(el=>el.classList.toggle('is-active',el.dataset.world===id));
   const set=(selector,value)=>{const el=document.querySelector(selector);if(el)el.textContent=value};
   set('[data-world-title]',world.title);set('[data-world-en]',world.en);set('[data-world-kicker]',world.kicker);set('[data-world-intro]',world.intro);
-  const selectedPlanet=document.querySelector('[data-selected-planet]');
-  if(selectedPlanet)selectedPlanet.style.backgroundImage=`url("assets/${planetAssets[id]}")`;
   const timeline=document.querySelector('[data-world-highlights]');
   if(timeline)timeline.innerHTML=world.highlights.map(([date,title])=>`<div><time>${date}</time><i></i><span>${title}</span></div>`).join('');
   const notes=document.querySelector('[data-world-notes]');

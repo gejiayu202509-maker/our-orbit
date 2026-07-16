@@ -47,3 +47,18 @@
 .universe-page .selected-planet{border-radius:0;background-size:178%;mask-image:radial-gradient(circle at 50% 50%,#000 68%,rgba(0,0,0,.9) 80%,transparent 98%);-webkit-mask-image:radial-gradient(circle at 50% 50%,#000 68%,rgba(0,0,0,.9) 80%,transparent 98%);box-shadow:none;filter:drop-shadow(-13px 18px 24px rgba(4,7,24,.5)) drop-shadow(0 0 25px rgba(184,200,255,.28))}
 @keyframes planet-drift{0%,100%{transform:translate3d(0,0,0) rotate(-.35deg)}50%{transform:translate3d(0,-7px,0) rotate(.35deg)}}
 @keyframes galaxy-breathe{0%,100%{opacity:.55;transform:scale(.98)}50%{opacity:1;transform:scale(1.03)}}
+
+/* Unified atlas composition: the worlds are painted into one shared galaxy
+   instead of being nine separate images layered on top of a background. */
+.universe-page .atlas-background{display:none}
+.universe-page{background:#080d26}
+.universe-page .galaxy-stage{background:url('../assets/galaxy-atlas-integrated.png') center center/cover no-repeat;border-radius:18px 18px 0 0;box-shadow:inset 0 -45px 50px rgba(5,8,29,.24)}
+.universe-page .galaxy-stage:before{opacity:.34;animation:galaxy-breathe 15s ease-in-out infinite}
+.universe-page .orbit{display:none}
+.universe-page .planet-node>i{visibility:hidden;animation:none!important;filter:none!important;mask-image:none;-webkit-mask-image:none;background:none!important;width:96px}
+.universe-page .planet-node{gap:2px;text-shadow:0 2px 8px #05091f}
+.universe-page .planet-node:hover,.universe-page .planet-node.is-active{filter:none;transform:translateY(-2px)}
+.universe-page .planet-node:hover span,.universe-page .planet-node.is-active span{color:#ffe2bd;text-shadow:0 0 18px rgba(255,210,161,.76)}
+.universe-page .planet-node--wishes{left:7%;top:11%}.universe-page .planet-node--diary{left:20%;top:23%}.universe-page .planet-node--letters{left:41%;top:17%}.universe-page .planet-node--signal{left:61%;top:22%}.universe-page .planet-node--gallery{right:15%;top:29%}.universe-page .planet-node--stats{right:3%;top:16%}.universe-page .planet-node--timeline{left:17%;top:52%}.universe-page .planet-node--map{left:55%;top:63%}.universe-page .planet-node--room{right:8%;top:47%}
+.universe-page .selected-planet{border-radius:50%;background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.85),transparent 7%),radial-gradient(circle at 40% 35%,#91a4d2,#45547e 48%,#121b42 78%)!important;mask-image:none;-webkit-mask-image:none;filter:none;box-shadow:-13px 18px 38px rgba(4,7,24,.48),0 0 35px rgba(184,200,255,.18)}
+@media(max-width:700px){.universe-page .galaxy-stage{border-radius:14px}.universe-page .planet-node>i{width:54px}.universe-page .planet-node--wishes{left:5%;top:11%}.universe-page .planet-node--diary{left:18%;top:23%}.universe-page .planet-node--timeline{left:13%;top:52%}.universe-page .planet-node--map{left:52%;top:63%}.universe-page .planet-node--room{right:5%;top:47%}}
