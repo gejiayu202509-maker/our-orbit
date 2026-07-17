@@ -44,6 +44,14 @@ function showTimelineMemory(){
   document.querySelector('.world-arrival__sky')?.setAttribute('hidden','');
   memory.removeAttribute('hidden');
   document.title='小圆｜时间轨道｜OUR ORBIT';
+  document.querySelector('[data-memory-approach]')?.addEventListener('click',event=>{
+    const scene=event.currentTarget.closest('[data-timeline-memory]');
+    if(!scene)return;
+    scene.classList.add('is-approaching');
+    event.currentTarget.disabled=true;
+    event.currentTarget.querySelector('span').textContent='停留在这一刻';
+    event.currentTarget.querySelector('small').textContent='2024.11.01';
+  },{once:true});
   return true;
 }
 
