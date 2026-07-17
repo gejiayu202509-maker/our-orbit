@@ -147,3 +147,22 @@
 @keyframes atlas-idle-drift{0%{transform:translate3d(-.22%,.16%,0) scale(1.003);filter:brightness(.99) saturate(1)}46%{transform:translate3d(.28%,-.2%,0) scale(1.014);filter:brightness(1.035) saturate(1.075)}100%{transform:translate3d(-.12%,.24%,0) scale(1.006);filter:brightness(1.01) saturate(1.035)}}
 @keyframes nebula-tide{0%{transform:translate3d(-2%,-1%,0) scale(.98);opacity:.26}54%{transform:translate3d(2.6%,1.8%,0) scale(1.08);opacity:.62}100%{transform:translate3d(-1%,2.2%,0) scale(1.02);opacity:.38}}
 @media(prefers-reduced-motion:reduce){.universe-page .galaxy-map,.universe-page .galaxy-map:before{animation:none!important}}
+
+/* V0.12 ambient motion system.  The painted atlas and its labels share one
+   exact 1672 × 941 coordinate plane, preventing crop-induced label drift. */
+.universe-page .galaxy-map{width:min(100%,calc(177.683svh - 170.576px));height:auto;max-height:100%;aspect-ratio:1672/941;animation:camera-drift var(--motion-camera,34s) ease-in-out infinite alternate}
+.universe-page .galaxy-map .atlas-camera-layer{background-size:100% 100%}
+.universe-page .galaxy-map .atlas-camera-layer:before{display:block;content:'';position:absolute;inset:0;z-index:2;pointer-events:none;mix-blend-mode:screen;opacity:0;background:radial-gradient(ellipse at 50% 49%,rgba(255,231,190,.19),transparent 19%),radial-gradient(ellipse at 54% 55%,rgba(208,169,255,.1),transparent 38%);animation:galaxy-core-breathe var(--motion-core,48s) ease-in-out infinite}
+.universe-page .galaxy-map:before{opacity:calc(.44 * var(--motion-intensity,1));animation:nebula-tide var(--motion-nebula,66s) ease-in-out infinite alternate}
+.universe-page .galaxy-map .atlas-camera-layer:after{opacity:calc(.78 * var(--motion-intensity,1));animation-duration:var(--motion-dust,28s)}
+.universe-page .atlas-aurora{opacity:calc(.44 * var(--motion-intensity,1));animation-duration:var(--motion-aurora,54s)}
+.universe-page .planet-node span:after{animation:planet-presence var(--motion-marker,96s) ease-in-out infinite;animation-delay:var(--planet-phase,0s)}
+.universe-page .planet-node--timeline{--planet-phase:-16s}.universe-page .planet-node--map{--planet-phase:-61s}.universe-page .planet-node--room{--planet-phase:-38s}.universe-page .planet-node--gallery{--planet-phase:-74s}.universe-page .planet-node--diary{--planet-phase:-29s}.universe-page .planet-node--letters{--planet-phase:-82s}.universe-page .planet-node--stats{--planet-phase:-47s}.universe-page .planet-node--wishes{--planet-phase:-8s}.universe-page .planet-node--signal{--planet-phase:-55s}
+.universe-page .planet-node.is-active span:after{animation:anchor-pulse 5.8s ease-in-out infinite}
+.universe-page .galaxy-stage.is-entering .galaxy-map{animation:target-flight 3.6s linear forwards}
+@keyframes camera-drift{0%{transform:translate3d(-.18%,.13%,0) scale(1.002);filter:brightness(.995) saturate(1)}50%{transform:translate3d(.2%,-.16%,0) scale(1.009);filter:brightness(1.025) saturate(1.045)}100%{transform:translate3d(-.08%,.18%,0) scale(1.004);filter:brightness(1.008) saturate(1.02)}}
+@keyframes galaxy-core-breathe{0%,100%{opacity:.02;transform:scale(.985)}50%{opacity:.075;transform:scale(1.035)}}
+@keyframes planet-presence{0%,100%{opacity:.82;box-shadow:0 0 11px 3px rgba(255,210,150,.28)}50%{opacity:1;box-shadow:0 0 18px 5px rgba(255,218,169,.5)}}
+html[data-motion-paused='true'] .universe-page .galaxy-map,html[data-motion-paused='true'] .universe-page .galaxy-map:before,html[data-motion-paused='true'] .universe-page .atlas-camera-layer:before,html[data-motion-paused='true'] .universe-page .atlas-camera-layer:after,html[data-motion-paused='true'] .universe-page .atlas-aurora,html[data-motion-paused='true'] .universe-page .planet-node span:after{animation-play-state:paused}
+html[data-motion='reduced'] .universe-page .galaxy-map,html[data-motion='reduced'] .universe-page .galaxy-map:before,html[data-motion='reduced'] .universe-page .atlas-camera-layer:before,html[data-motion='reduced'] .universe-page .atlas-camera-layer:after,html[data-motion='reduced'] .universe-page .atlas-aurora,html[data-motion='reduced'] .universe-page .planet-node span:after{animation:none!important}
+@media(max-width:700px){.universe-page .galaxy-map{width:100%;height:auto;max-height:none;aspect-ratio:1672/941}.universe-page .atlas-aurora{filter:blur(31px)}.universe-page .galaxy-map:before{opacity:calc(.28 * var(--motion-intensity,.58))}}
