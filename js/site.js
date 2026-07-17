@@ -36,6 +36,17 @@ function renderWorld(id){
   document.body.dataset.selectedWorld=id;
 }
 
+function showTimelineMemory(){
+  const memory=document.querySelector('[data-timeline-memory]');
+  if(!memory)return false;
+  document.body.classList.add('timeline-world');
+  document.querySelector('[data-generic-world]')?.setAttribute('hidden','');
+  document.querySelector('.world-arrival__sky')?.setAttribute('hidden','');
+  memory.removeAttribute('hidden');
+  document.title='小圆｜时间轨道｜OUR ORBIT';
+  return true;
+}
+
 document.addEventListener('DOMContentLoaded',()=>{
   const days=dayCount();
   document.querySelectorAll('[data-day-count]').forEach(el=>el.textContent=`DAY ${days}`);
@@ -43,12 +54,12 @@ document.addEventListener('DOMContentLoaded',()=>{
   requestAnimationFrame(()=>document.body.classList.add('is-ready'));
   const isAtlas=document.body.classList.contains('universe-page');
   const exitWorld=()=>{const stage=document.querySelector('.galaxy-stage');const overlay=document.querySelector('[data-flight-overlay]');if(!stage||!overlay)return;stage.classList.remove('is-entering');overlay.classList.remove('is-visible','is-arrived');stage.style.removeProperty('--jump-x');stage.style.removeProperty('--jump-y');stage.style.removeProperty('--fly-x');stage.style.removeProperty('--fly-y');stage.style.removeProperty('--flight-color')};
-  const enterWorld=(id)=>{const stage=document.querySelector('.galaxy-stage');const overlay=document.querySelector('[data-flight-overlay]');if(!stage||!overlay||stage.classList.contains('is-entering'))return;const focus={timeline:[.226,.659],map:[.600,.798],room:[.857,.599],gallery:[.800,.343],diary:[.245,.294],letters:[.457,.216],stats:[.912,.221],wishes:[.111,.147],signal:[.650,.288]}[id]||[.5,.5];const color={timeline:'#7588e8',map:'#77b7d9',room:'#d78359',gallery:'#d5e7ff',diary:'#b78bbb',letters:'#f1bd7c',stats:'#b57c5b',wishes:'#d9d3bc',signal:'#63c8be'}[id]||'#cfc6f4';const scale=5.1;stage.style.setProperty('--jump-x',`${focus[0]*100}%`);stage.style.setProperty('--jump-y',`${focus[1]*100}%`);stage.style.setProperty('--fly-x',`${50-focus[0]*scale*100}%`);stage.style.setProperty('--fly-y',`${50-focus[1]*scale*100}%`);stage.style.setProperty('--flight-color',color);overlay.style.setProperty('--flight-color',color);overlay.querySelector('[data-flight-en]').textContent=worlds[id].en;overlay.querySelector('[data-flight-title]').textContent=worlds[id].title;overlay.querySelector('[data-flight-kicker]').textContent=worlds[id].kicker;stage.classList.add('is-entering');window.setTimeout(()=>overlay.classList.add('is-visible'),3040);window.setTimeout(()=>{history.pushState({world:id},'',`world.html?world=${encodeURIComponent(id)}`);overlay.classList.add('is-arrived')},3660)};
+  const enterWorld=(id)=>{const stage=document.querySelector('.galaxy-stage');const overlay=document.querySelector('[data-flight-overlay]');if(!stage||!overlay||stage.classList.contains('is-entering'))return;const focus={timeline:[.226,.659],map:[.600,.798],room:[.857,.599],gallery:[.800,.343],diary:[.245,.294],letters:[.457,.216],stats:[.912,.221],wishes:[.111,.147],signal:[.650,.288]}[id]||[.5,.5];const color={timeline:'#7588e8',map:'#77b7d9',room:'#d78359',gallery:'#d5e7ff',diary:'#b78bbb',letters:'#f1bd7c',stats:'#b57c5b',wishes:'#d9d3bc',signal:'#63c8be'}[id]||'#cfc6f4';const scale=5.1;stage.style.setProperty('--jump-x',`${focus[0]*100}%`);stage.style.setProperty('--jump-y',`${focus[1]*100}%`);stage.style.setProperty('--fly-x',`${50-focus[0]*scale*100}%`);stage.style.setProperty('--fly-y',`${50-focus[1]*scale*100}%`);stage.style.setProperty('--flight-color',color);overlay.style.setProperty('--flight-color',color);overlay.querySelector('[data-flight-en]').textContent=worlds[id].en;overlay.querySelector('[data-flight-title]').textContent=worlds[id].title;overlay.querySelector('[data-flight-kicker]').textContent=worlds[id].kicker;stage.classList.add('is-entering');window.setTimeout(()=>overlay.classList.add('is-visible'),3040);window.setTimeout(()=>window.location.assign(`world.html?world=${encodeURIComponent(id)}`),3660)};
   if(isAtlas)window.addEventListener('popstate',exitWorld);
   document.querySelectorAll('[data-world]').forEach(button=>button.addEventListener('click',()=>{if(isAtlas){enterWorld(button.dataset.world)}else{renderWorld(button.dataset.world);document.querySelector('[data-world-nav]')?.classList.remove('is-open')}}));
   document.querySelector('[data-menu-button]')?.addEventListener('click',()=>document.querySelector('[data-world-nav]')?.classList.toggle('is-open'));
   document.querySelectorAll('.detail-tabs button').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('.detail-tabs button').forEach(item=>item.classList.remove('is-active'));button.classList.add('is-active')}));
-  if(document.querySelector('[data-world-title]')){const requested=new URLSearchParams(window.location.search).get('world');renderWorld(requested&&worlds[requested]?requested:'timeline')}
+  if(document.querySelector('[data-world-title]')){const requested=new URLSearchParams(window.location.search).get('world');const id=requested&&worlds[requested]?requested:'timeline';if(id==='timeline'&&showTimelineMemory()){renderWorld(id)}else{renderWorld(id)}}
   if(window.matchMedia('(pointer:fine)').matches){
     const image=document.querySelector('.home-scene__image');
     window.addEventListener('mousemove',event=>{if(!image)return;const x=(event.clientX/window.innerWidth-.5)*8;const y=(event.clientY/window.innerHeight-.5)*5;image.style.setProperty('--mouse-x',`${x}px`);image.style.setProperty('--mouse-y',`${y}px`)},{passive:true});
