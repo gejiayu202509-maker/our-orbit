@@ -166,3 +166,11 @@
 html[data-motion-paused='true'] .universe-page .galaxy-map,html[data-motion-paused='true'] .universe-page .galaxy-map:before,html[data-motion-paused='true'] .universe-page .atlas-camera-layer:before,html[data-motion-paused='true'] .universe-page .atlas-camera-layer:after,html[data-motion-paused='true'] .universe-page .atlas-aurora,html[data-motion-paused='true'] .universe-page .planet-node span:after{animation-play-state:paused}
 html[data-motion='reduced'] .universe-page .galaxy-map,html[data-motion='reduced'] .universe-page .galaxy-map:before,html[data-motion='reduced'] .universe-page .atlas-camera-layer:before,html[data-motion='reduced'] .universe-page .atlas-camera-layer:after,html[data-motion='reduced'] .universe-page .atlas-aurora,html[data-motion='reduced'] .universe-page .planet-node span:after{animation:none!important}
 @media(max-width:700px){.universe-page .galaxy-map{width:100%;height:auto;max-height:none;aspect-ratio:1672/941}.universe-page .atlas-aurora{filter:blur(31px)}.universe-page .galaxy-map:before{opacity:calc(.28 * var(--motion-intensity,.58))}}
+
+/* The opening pair remains a single cinematic composition: camera and dawn
+   light breathe around it, so it never breaks into visible image layers. */
+.home-scene__image{--mouse-x:0px;--mouse-y:0px;animation:home-camera-drift var(--motion-camera,34s) ease-in-out infinite alternate;will-change:transform}
+.home-scene__wash{animation:home-dawn-breathe var(--motion-core,48s) ease-in-out infinite}
+@keyframes home-camera-drift{0%{transform:translate(calc(var(--mouse-x) - 4px),calc(var(--mouse-y) + 3px)) scale(1.015)}50%{transform:translate(calc(var(--mouse-x) + 4px),calc(var(--mouse-y) - 3px)) scale(1.029)}100%{transform:translate(calc(var(--mouse-x) - 2px),calc(var(--mouse-y) + 2px)) scale(1.02)}}
+@keyframes home-dawn-breathe{0%,100%{opacity:.84}50%{opacity:1}}
+html[data-motion-paused='true'] .home-scene__image,html[data-motion-paused='true'] .home-scene__wash,html[data-motion='reduced'] .home-scene__image,html[data-motion='reduced'] .home-scene__wash{animation:none!important}

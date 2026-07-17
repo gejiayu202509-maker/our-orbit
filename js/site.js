@@ -49,6 +49,6 @@ document.addEventListener('DOMContentLoaded',()=>{
   if(document.querySelector('[data-world-title]')){const requested=new URLSearchParams(window.location.search).get('world');renderWorld(requested&&worlds[requested]?requested:'timeline')}
   if(window.matchMedia('(pointer:fine)').matches){
     const image=document.querySelector('.home-scene__image');
-    window.addEventListener('mousemove',event=>{if(!image)return;const x=(event.clientX/window.innerWidth-.5)*8;const y=(event.clientY/window.innerHeight-.5)*5;image.style.transform=`translate(${x}px,${y}px) scale(1.025)`},{passive:true});
+    window.addEventListener('mousemove',event=>{if(!image)return;const x=(event.clientX/window.innerWidth-.5)*8;const y=(event.clientY/window.innerHeight-.5)*5;image.style.setProperty('--mouse-x',`${x}px`);image.style.setProperty('--mouse-y',`${y}px`)},{passive:true});
   }
 });
