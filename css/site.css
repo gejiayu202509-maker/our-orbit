@@ -132,3 +132,18 @@
 .universe-page .galaxy-stage.is-entering .galaxy-map{animation:target-flight 3.6s linear forwards}
 .universe-page .galaxy-stage.is-entering:after{animation:jump-flash 3.6s ease-in forwards}
 .world-transition.is-visible{opacity:0;animation:world-reveal .62s ease forwards}
+
+/* Idle motion keeps the entire atlas in one coordinate system, so labels never
+   drift away from the painted planets while the universe breathes. */
+.universe-page .galaxy-map{will-change:transform,filter;animation:atlas-idle-drift 22s ease-in-out infinite alternate}
+.universe-page .galaxy-map:before{content:'';position:absolute;z-index:3;inset:-12%;pointer-events:none;mix-blend-mode:screen;opacity:.48;background:radial-gradient(ellipse at 18% 62%,rgba(109,103,235,.16),transparent 34%),radial-gradient(ellipse at 74% 38%,rgba(255,186,157,.14),transparent 31%),radial-gradient(ellipse at 56% 76%,rgba(166,115,246,.1),transparent 27%);filter:blur(26px);animation:nebula-tide 15s ease-in-out infinite alternate}
+.universe-page .galaxy-map .atlas-camera-layer:after{opacity:.9;animation-duration:17s}
+.universe-page .atlas-aurora{opacity:.62;animation-duration:13s;filter:blur(24px)}
+.universe-page .galaxy-map .planet-node--wishes{left:11.12%;top:21.1%}
+.universe-page .galaxy-map .planet-node--diary{left:24.86%;top:36.9%}
+.universe-page .galaxy-map .planet-node--gallery{left:79.94%;top:41.9%}
+.universe-page .galaxy-map .planet-node--stats{left:91.26%;top:26.1%}
+.universe-page .galaxy-stage.is-entering .galaxy-map{animation:target-flight 3.6s linear forwards}
+@keyframes atlas-idle-drift{0%{transform:translate3d(-.22%,.16%,0) scale(1.003);filter:brightness(.99) saturate(1)}46%{transform:translate3d(.28%,-.2%,0) scale(1.014);filter:brightness(1.035) saturate(1.075)}100%{transform:translate3d(-.12%,.24%,0) scale(1.006);filter:brightness(1.01) saturate(1.035)}}
+@keyframes nebula-tide{0%{transform:translate3d(-2%,-1%,0) scale(.98);opacity:.26}54%{transform:translate3d(2.6%,1.8%,0) scale(1.08);opacity:.62}100%{transform:translate3d(-1%,2.2%,0) scale(1.02);opacity:.38}}
+@media(prefers-reduced-motion:reduce){.universe-page .galaxy-map,.universe-page .galaxy-map:before{animation:none!important}}
