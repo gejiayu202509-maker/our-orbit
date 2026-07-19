@@ -15,6 +15,17 @@ const planetAssets={
   diary:'planet-diary.png',letters:'planet-letters.png',stats:'planet-stats.png',wishes:'planet-wishes.png',signal:'planet-signal.png'
 };
 
+const timelineFlights=[
+  {index:'01',range:'2024.10 — 2024.11',name:'起飞之后',nodes:[
+    {id:'relation',x:37,y:54,date:'2024.10.30',title:'确定关系',place:'故事开始的这一天',status:'已抵达'},
+    {id:'xiaoyuan',x:72,y:62,date:'2024.11.01',title:'第一次合影',place:'五源河体育场 · 小圆',status:'进入记忆'}
+  ]},
+  {index:'02',range:'等待下一次归档',name:'航线仍在延伸',nodes:[
+    {id:'cinema',x:66,y:58,date:'日期待补',title:'第一次看电影',place:'电影院 · 两个相邻座位',status:'进入记忆'},
+    {id:'future-2',x:82,y:40,date:'TO BE CONTINUED',title:'更远的地方',place:'书店、古镇、下一次旅行',status:'未来坐标'}
+  ]}
+];
+
 function dayCount(){
   const start=new Date('2024-10-30T00:00:00+08:00');
   const now=new Date();
@@ -39,19 +50,78 @@ function renderWorld(id){
 function showTimelineMemory(){
   const memory=document.querySelector('[data-timeline-memory]');
   if(!memory)return false;
+  document.body.classList.remove('timeline-route-page','cinema-world');
   document.body.classList.add('timeline-world');
   document.querySelector('[data-generic-world]')?.setAttribute('hidden','');
+  document.querySelector('[data-timeline-route]')?.setAttribute('hidden','');
+  document.querySelector('[data-cinema-memory]')?.setAttribute('hidden','');
   document.querySelector('.world-arrival__sky')?.setAttribute('hidden','');
   memory.removeAttribute('hidden');
+  requestAnimationFrame(()=>memory.classList.add('is-approaching'));
   document.title='小圆｜时间轨道｜OUR ORBIT';
-  document.querySelector('[data-memory-approach]')?.addEventListener('click',event=>{
-    const scene=event.currentTarget.closest('[data-timeline-memory]');
-    if(!scene)return;
-    scene.classList.add('is-approaching');
-    event.currentTarget.disabled=true;
-    event.currentTarget.querySelector('span').textContent='停留在这一刻';
-    event.currentTarget.querySelector('small').textContent='2024.11.01';
-  },{once:true});
+  const back=document.querySelector('[data-world-back]');
+  if(back){back.href='world.html?world=timeline';back.textContent='← 返回时间轨道'}
+  return true;
+}
+
+function showCinemaMemory(){
+  const memory=document.querySelector('[data-cinema-memory]');
+  if(!memory)return false;
+  document.body.classList.remove('timeline-route-page','timeline-world');
+  document.body.classList.add('cinema-world');
+  document.querySelector('[data-generic-world]')?.setAttribute('hidden','');
+  document.querySelector('[data-timeline-route]')?.setAttribute('hidden','');
+  document.querySelector('[data-timeline-memory]')?.setAttribute('hidden','');
+  document.querySelector('.world-arrival__sky')?.setAttribute('hidden','');
+  memory.removeAttribute('hidden');
+  requestAnimationFrame(()=>memory.classList.add('is-ready'));
+  document.title='第一次看电影｜时间轨道｜OUR ORBIT';
+  const back=document.querySelector('[data-world-back]');
+  if(back){back.href='world.html?world=timeline';back.textContent='← 返回时间轨道'}
+  return true;
+}
+
+function showTimelineRoute(){
+  const route=document.querySelector('[data-timeline-route]');
+  if(!route)return false;
+  document.body.classList.remove('timeline-world','cinema-world');
+  document.body.classList.add('timeline-route-page');
+  document.querySelector('[data-generic-world]')?.setAttribute('hidden','');
+  document.querySelector('[data-timeline-memory]')?.setAttribute('hidden','');
+  document.querySelector('[data-cinema-memory]')?.setAttribute('hidden','');
+  document.querySelector('.world-arrival__sky')?.setAttribute('hidden','');
+  route.removeAttribute('hidden');
+  document.title='时间轨道｜OUR ORBIT';
+  let flightIndex=0;
+  const renderFlight=()=>{
+    const flight=timelineFlights[flightIndex];
+    route.querySelector('[data-route-index]').textContent=flight.index;
+    route.querySelector('[data-route-range]').textContent=flight.range;
+    route.querySelector('[data-route-name]').textContent=flight.name;
+    route.querySelector('[data-route-nodes]').innerHTML=flight.nodes.map(node=>`<button class="timeline-route__node ${['xiaoyuan','cinema'].includes(node.id)?'is-reachable':''}" type="button" data-memory-id="${node.id}" style="--node-x:${node.x}%;--node-y:${node.y}%"><i></i><span><time>${node.date}</time><strong>${node.title}</strong><small>${node.place}</small><em>${node.status}</em></span></button>`).join('');
+    route.querySelector('[data-route-prev]').disabled=flightIndex===0;
+    route.querySelector('[data-route-next]').disabled=flightIndex===timelineFlights.length-1;
+    route.classList.remove('is-changing');
+  };
+  const changeFlight=step=>{
+    const next=Math.max(0,Math.min(timelineFlights.length-1,flightIndex+step));
+    if(next===flightIndex)return;
+    route.classList.add('is-changing');
+    window.setTimeout(()=>{flightIndex=next;renderFlight()},520);
+  };
+  route.querySelector('[data-route-prev]').addEventListener('click',()=>changeFlight(-1));
+  route.querySelector('[data-route-next]').addEventListener('click',()=>changeFlight(1));
+  route.querySelector('[data-route-continue]').addEventListener('click',()=>changeFlight(1));
+  route.addEventListener('click',event=>{
+    const node=event.target.closest('[data-memory-id]');
+    if(!node||!['xiaoyuan','cinema'].includes(node.dataset.memoryId))return;
+    route.style.setProperty('--target-x',node.style.getPropertyValue('--node-x'));
+    route.style.setProperty('--target-y',node.style.getPropertyValue('--node-y'));
+    route.classList.add('is-entering-memory');
+    window.setTimeout(()=>window.location.assign(`world.html?world=timeline&memory=${encodeURIComponent(node.dataset.memoryId)}`),1550);
+  });
+  window.addEventListener('keydown',event=>{if(event.key==='ArrowRight')changeFlight(1);if(event.key==='ArrowLeft')changeFlight(-1)});
+  renderFlight();
   return true;
 }
 
@@ -67,7 +137,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   document.querySelectorAll('[data-world]').forEach(button=>button.addEventListener('click',()=>{if(isAtlas){enterWorld(button.dataset.world)}else{renderWorld(button.dataset.world);document.querySelector('[data-world-nav]')?.classList.remove('is-open')}}));
   document.querySelector('[data-menu-button]')?.addEventListener('click',()=>document.querySelector('[data-world-nav]')?.classList.toggle('is-open'));
   document.querySelectorAll('.detail-tabs button').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('.detail-tabs button').forEach(item=>item.classList.remove('is-active'));button.classList.add('is-active')}));
-  if(document.querySelector('[data-world-title]')){const requested=new URLSearchParams(window.location.search).get('world');const id=requested&&worlds[requested]?requested:'timeline';if(id==='timeline'&&showTimelineMemory()){renderWorld(id)}else{renderWorld(id)}}
+  if(document.querySelector('[data-world-title]')){const query=new URLSearchParams(window.location.search);const requested=query.get('world');const id=requested&&worlds[requested]?requested:'timeline';if(id==='timeline'){const memory=query.get('memory');if(memory==='xiaoyuan')showTimelineMemory();else if(memory==='cinema')showCinemaMemory();else showTimelineRoute();renderWorld(id)}else{renderWorld(id)}}
   if(window.matchMedia('(pointer:fine)').matches){
     const image=document.querySelector('.home-scene__image');
     window.addEventListener('mousemove',event=>{if(!image)return;const x=(event.clientX/window.innerWidth-.5)*8;const y=(event.clientY/window.innerHeight-.5)*5;image.style.setProperty('--mouse-x',`${x}px`);image.style.setProperty('--mouse-y',`${y}px`)},{passive:true});

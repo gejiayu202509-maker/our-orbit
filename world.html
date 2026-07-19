@@ -4,16 +4,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>时间轨道｜OUR ORBIT</title>
-  <link rel="stylesheet" href="css/site.css?v=timeline-v020">
+  <link rel="stylesheet" href="css/site.css?v=timeline-v022">
+  <link rel="stylesheet" href="css/timeline-cinema.css?v=timeline-v022">
 </head>
 <body class="world-page">
   <div class="world-arrival__sky" aria-hidden="true"></div>
-  <header class="topbar"><a class="brand" href="index.html">OUR ORBIT <span>·</span> 我们的轨道</a><a class="world-arrival__back" href="universe.html">← 返回宇宙地图</a></header>
+  <header class="topbar"><a class="brand" href="index.html">OUR ORBIT <span>·</span> 我们的轨道</a><a class="world-arrival__back" data-world-back href="universe.html">← 返回宇宙地图</a></header>
   <main class="world-arrival" data-generic-world>
     <p data-world-en>WORLD</p>
     <h1 data-world-title>新的世界</h1>
     <span data-world-kicker>这颗星球的故事正在展开。</span>
     <small>THIS WORLD IS READY TO GROW</small>
+  </main>
+  <main class="timeline-route" data-timeline-route hidden aria-label="时间轨道飞船航线">
+    <div class="timeline-route__world" aria-hidden="true"><i class="timeline-route__cloud timeline-route__cloud--one"></i><i class="timeline-route__cloud timeline-route__cloud--two"></i><i class="timeline-route__dust"></i></div>
+    <div class="timeline-route__cockpit" aria-hidden="true"><i></i><i></i></div>
+    <section class="timeline-route__heading">
+      <p>OUR ORBIT · STORY FLIGHT</p>
+      <h1>时间轨道</h1>
+      <span>俯瞰已经抵达的地点，沿着我们的航线继续向前。</span>
+    </section>
+    <section class="timeline-route__chapter" aria-live="polite">
+      <span data-route-index>01</span>
+      <p data-route-range>2024.10 — 2024.11</p>
+      <strong data-route-name>起飞之后</strong>
+    </section>
+    <div class="timeline-route__nodes" data-route-nodes></div>
+    <div class="timeline-route__controls">
+      <button type="button" data-route-prev disabled>← 上一航段</button>
+      <button type="button" class="timeline-route__continue" data-route-continue><span>继续飞行</span><small>CONTINUE THE FLIGHT →</small></button>
+      <button type="button" data-route-next>下一航段 →</button>
+    </div>
+    <p class="timeline-route__hint">点击发光坐标，飞入那一天的细节。方向键 ← → 也能继续航行。</p>
   </main>
   <main class="timeline-memory" data-timeline-memory hidden aria-label="2024年11月1日的小圆记忆空间">
     <div class="timeline-memory__space" aria-hidden="true">
@@ -36,8 +58,27 @@
       <p>蓝色跑道、看台与落日，被收进这一段刚刚开始的轨道。</p>
     </aside>
     <div class="timeline-memory__progress" aria-hidden="true"><i></i><span>01</span><b>TO BE CONTINUED</b></div>
-    <button class="timeline-memory__approach" type="button" data-memory-approach><span>继续靠近</span><small>FOLLOW THE TRACK</small></button>
   </main>
-  <script src="js/site.js?v=timeline-v020"></script>
+  <main class="cinema-memory" data-cinema-memory hidden aria-label="第一次看电影的记忆空间">
+    <div class="cinema-memory__scene" aria-hidden="true"></div>
+    <div class="cinema-memory__projector" aria-hidden="true"></div>
+    <section class="cinema-memory__heading">
+      <p>MEMORY 02 · CINEMA</p>
+      <h1>第一次<br>看电影</h1>
+      <span>那一晚的细节，等我们慢慢补上。</span>
+    </section>
+    <section class="cinema-memory__film" aria-label="那晚留下的三个画面">
+      <figure><img src="assets/memory-cinema-hands-seat.jpg" alt="电影院座位旁牵在一起的手"><figcaption>灯暗下来以后</figcaption></figure>
+      <figure><img src="assets/memory-cinema-hold-hands.jpg" alt="走出电影院后牵在一起的手"><figcaption>散场以后，也没有松开</figcaption></figure>
+      <figure><img src="assets/memory-cinema-tianyu.jpg" alt="手指相触组成的天羽手势"><figcaption>留给那天的暗号</figcaption></figure>
+    </section>
+    <aside class="cinema-memory__meta">
+      <span>DATE / PLACE</span>
+      <strong>等待补全</strong>
+      <p>FIRST MOVIE TOGETHER</p>
+    </aside>
+    <div class="cinema-memory__progress" aria-hidden="true"><i></i><span>02</span><b>THE FILM IS STILL PLAYING</b></div>
+  </main>
+  <script src="js/site.js?v=timeline-v022"></script>
 </body>
 </html>
