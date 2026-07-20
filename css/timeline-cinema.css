@@ -13,6 +13,19 @@
   bottom: 25px;
 }
 
+/* Aerial route v2: the cinema is a real ground landmark in the shared map. */
+.timeline-route__world {
+  background-image: url('../assets/timeline-flight-world-v2.png');
+}
+
+@media (max-width: 760px) {
+  .timeline-route__nodes .timeline-route__node:nth-child(1) { left: 21% !important; top: 53% !important; }
+  .timeline-route__nodes .timeline-route__node:nth-child(2) { left: 48% !important; top: 48% !important; }
+  .timeline-route__nodes .timeline-route__node:nth-child(3) { left: 78% !important; top: 38% !important; }
+  .timeline-route__nodes .timeline-route__node:nth-child(4) { left: 65% !important; top: 69% !important; }
+  .timeline-route__nodes .timeline-route__node:nth-child(5) { left: 37% !important; top: 74% !important; }
+}
+
 .cinema-world {
   background: #050919;
   color: #fff8ef;

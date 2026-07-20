@@ -15,16 +15,18 @@ const planetAssets={
   diary:'planet-diary.png',letters:'planet-letters.png',stats:'planet-stats.png',wishes:'planet-wishes.png',signal:'planet-signal.png'
 };
 
-const timelineFlights=[
-  {index:'01',range:'2024.10 — 2024.11',name:'起飞之后',nodes:[
-    {id:'relation',x:37,y:54,date:'2024.10.30',title:'确定关系',place:'故事开始的这一天',status:'已抵达'},
-    {id:'xiaoyuan',x:72,y:62,date:'2024.11.01',title:'第一次合影',place:'五源河体育场 · 小圆',status:'进入记忆'}
-  ]},
-  {index:'02',range:'等待下一次归档',name:'航线仍在延伸',nodes:[
-    {id:'cinema',x:66,y:58,date:'日期待补',title:'第一次看电影',place:'电影院 · 两个相邻座位',status:'进入记忆'},
-    {id:'future-2',x:82,y:40,date:'TO BE CONTINUED',title:'更远的地方',place:'书店、古镇、下一次旅行',status:'未来坐标'}
-  ]}
-];
+const timelineFlight={
+  index:'01',
+  range:'2024.10 — 故事仍在继续',
+  name:'沿着我们的航线',
+  nodes:[
+    {id:'relation',x:21,y:53,date:'2024.10.30',title:'确定关系',place:'起飞点 · 故事开始的这一天',status:'已抵达'},
+    {id:'book',x:48,y:48,date:'日期待补',title:'一起看书',place:'书店 · 等待归档',status:'等待点亮'},
+    {id:'travel',x:78,y:38,date:'TO BE CONTINUED',title:'下一次旅行',place:'古镇、海边或更远的地方',status:'未来坐标'},
+    {id:'xiaoyuan',x:65,y:69,date:'2024.11.01',title:'第一次合影',place:'五源河体育场 · 小圆',status:'进入记忆'},
+    {id:'cinema',x:37,y:74,date:'日期待补',title:'第一次看电影',place:'林间电影院 · 两个相邻座位',status:'进入记忆'}
+  ]
+};
 
 function dayCount(){
   const start=new Date('2024-10-30T00:00:00+08:00');
@@ -92,26 +94,10 @@ function showTimelineRoute(){
   document.querySelector('.world-arrival__sky')?.setAttribute('hidden','');
   route.removeAttribute('hidden');
   document.title='时间轨道｜OUR ORBIT';
-  let flightIndex=0;
-  const renderFlight=()=>{
-    const flight=timelineFlights[flightIndex];
-    route.querySelector('[data-route-index]').textContent=flight.index;
-    route.querySelector('[data-route-range]').textContent=flight.range;
-    route.querySelector('[data-route-name]').textContent=flight.name;
-    route.querySelector('[data-route-nodes]').innerHTML=flight.nodes.map(node=>`<button class="timeline-route__node ${['xiaoyuan','cinema'].includes(node.id)?'is-reachable':''}" type="button" data-memory-id="${node.id}" style="--node-x:${node.x}%;--node-y:${node.y}%"><i></i><span><time>${node.date}</time><strong>${node.title}</strong><small>${node.place}</small><em>${node.status}</em></span></button>`).join('');
-    route.querySelector('[data-route-prev]').disabled=flightIndex===0;
-    route.querySelector('[data-route-next]').disabled=flightIndex===timelineFlights.length-1;
-    route.classList.remove('is-changing');
-  };
-  const changeFlight=step=>{
-    const next=Math.max(0,Math.min(timelineFlights.length-1,flightIndex+step));
-    if(next===flightIndex)return;
-    route.classList.add('is-changing');
-    window.setTimeout(()=>{flightIndex=next;renderFlight()},520);
-  };
-  route.querySelector('[data-route-prev]').addEventListener('click',()=>changeFlight(-1));
-  route.querySelector('[data-route-next]').addEventListener('click',()=>changeFlight(1));
-  route.querySelector('[data-route-continue]').addEventListener('click',()=>changeFlight(1));
+  route.querySelector('[data-route-index]').textContent=timelineFlight.index;
+  route.querySelector('[data-route-range]').textContent=timelineFlight.range;
+  route.querySelector('[data-route-name]').textContent=timelineFlight.name;
+  route.querySelector('[data-route-nodes]').innerHTML=timelineFlight.nodes.map(node=>`<button class="timeline-route__node ${['xiaoyuan','cinema'].includes(node.id)?'is-reachable':''}" type="button" data-memory-id="${node.id}" style="--node-x:${node.x}%;--node-y:${node.y}%"><i></i><span><time>${node.date}</time><strong>${node.title}</strong><small>${node.place}</small><em>${node.status}</em></span></button>`).join('');
   route.addEventListener('click',event=>{
     const node=event.target.closest('[data-memory-id]');
     if(!node||!['xiaoyuan','cinema'].includes(node.dataset.memoryId))return;
@@ -120,8 +106,6 @@ function showTimelineRoute(){
     route.classList.add('is-entering-memory');
     window.setTimeout(()=>window.location.assign(`world.html?world=timeline&memory=${encodeURIComponent(node.dataset.memoryId)}`),1550);
   });
-  window.addEventListener('keydown',event=>{if(event.key==='ArrowRight')changeFlight(1);if(event.key==='ArrowLeft')changeFlight(-1)});
-  renderFlight();
   return true;
 }
 
