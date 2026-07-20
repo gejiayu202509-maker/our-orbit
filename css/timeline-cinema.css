@@ -15,7 +15,7 @@
 
 /* Aerial route v2: the cinema is a real ground landmark in the shared map. */
 .timeline-route__world {
-  background-image: url('../assets/timeline-flight-world-v2.png');
+  background-image: url('../assets/timeline-flight-world-v2.jpg');
 }
 
 @media (max-width: 760px) {
@@ -60,7 +60,7 @@
 .cinema-memory__scene {
   position: absolute;
   inset: -2%;
-  background: #070b1d url('../assets/timeline-cinema-world-v1.png') center/cover no-repeat;
+  background: #070b1d url('../assets/timeline-cinema-world-v1.jpg') center/cover no-repeat;
   filter: saturate(.92) brightness(.75);
   transform: scale(1.08);
   transition: transform 6s cubic-bezier(.16, .72, .18, 1), filter 2.4s ease;

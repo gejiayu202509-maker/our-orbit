@@ -1,0 +1,15 @@
+/* Web delivery layer: original PNG files remain available for future editing. */
+.universe-page .planet-node--timeline>i{background-image:url('../assets/planet-timeline.jpg')!important}
+.universe-page .planet-node--map>i{background-image:url('../assets/planet-map.jpg')!important}
+.universe-page .planet-node--room>i{background-image:url('../assets/planet-room.jpg')!important}
+.universe-page .planet-node--gallery>i{background-image:url('../assets/planet-gallery.jpg')!important}
+.universe-page .planet-node--diary>i{background-image:url('../assets/planet-diary.jpg')!important}
+.universe-page .planet-node--letters>i{background-image:url('../assets/planet-letters.jpg')!important}
+.universe-page .planet-node--stats>i{background-image:url('../assets/planet-stats.jpg')!important}
+.universe-page .planet-node--wishes>i{background-image:url('../assets/planet-wishes.jpg')!important}
+.universe-page .planet-node--signal>i{background-image:url('../assets/planet-signal.jpg')!important}
+.universe-page .galaxy-stage,.universe-page .atlas-camera-layer,.universe-page .galaxy-map .atlas-camera-layer{background-image:url('../assets/galaxy-atlas-integrated.jpg')!important}
+.world-arrival__sky{background-image:linear-gradient(135deg,rgba(14,17,54,.32),rgba(20,12,52,.55)),url('../assets/galaxy-atlas-integrated.jpg')}
+.timeline-memory__scene{background-image:url('../assets/timeline-xiaoyuan-memory-v1.jpg')}
+.memory-card:nth-child(1){background-image:linear-gradient(0deg,rgba(9,13,39,.8),transparent),url('../assets/hero-twin-planets.jpg')}
+.memory-card:nth-child(2),.memory-card:nth-child(3){background-image:linear-gradient(0deg,rgba(9,13,39,.86),transparent),url('../assets/galaxy-atlas.jpg')}

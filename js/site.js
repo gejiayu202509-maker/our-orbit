@@ -11,8 +11,8 @@ const worlds = {
 };
 
 const planetAssets={
-  timeline:'planet-timeline.png',map:'planet-map.png',room:'planet-room.png',gallery:'planet-gallery.png',
-  diary:'planet-diary.png',letters:'planet-letters.png',stats:'planet-stats.png',wishes:'planet-wishes.png',signal:'planet-signal.png'
+  timeline:'planet-timeline.jpg',map:'planet-map.jpg',room:'planet-room.jpg',gallery:'planet-gallery.jpg',
+  diary:'planet-diary.jpg',letters:'planet-letters.jpg',stats:'planet-stats.jpg',wishes:'planet-wishes.jpg',signal:'planet-signal.jpg'
 };
 
 const timelineFlight={
@@ -45,7 +45,7 @@ function renderWorld(id){
   const notes=document.querySelector('[data-world-notes]');
   if(notes)notes.innerHTML=world.notes.map(note=>`<p>${note}</p>`).join('');
   const gallery=document.querySelector('[data-world-gallery]');
-  if(gallery){const visuals=[planetAssets[id],'galaxy-atlas.png','hero-twin-planets.png'];gallery.innerHTML=world.cards.map((card,index)=>`<article class="memory-card" style="background-image:linear-gradient(0deg,rgba(9,13,39,.84),transparent),url('assets/${visuals[index]}')"><small>ARCHIVE · 0${index+1}</small><span>${card}</span></article>`).join('')}
+  if(gallery){const visuals=[planetAssets[id],'galaxy-atlas.jpg','hero-twin-planets.jpg'];gallery.innerHTML=world.cards.map((card,index)=>`<article class="memory-card" style="background-image:linear-gradient(0deg,rgba(9,13,39,.84),transparent),url('assets/${visuals[index]}')"><small>ARCHIVE · 0${index+1}</small><span>${card}</span></article>`).join('')}
   document.body.dataset.selectedWorld=id;
 }
 
